@@ -1,5 +1,6 @@
 Django>=4.2,<4.3
 django-import-export
 razorpay
-xhtml2pdf
+xhtml2pdf<0.2.17
+svglib<1.6
 Pillow
