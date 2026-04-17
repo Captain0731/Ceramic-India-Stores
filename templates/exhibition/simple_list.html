@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Exhibition List</title>
+</head>
+<body>
+    <h1>Exhibitions</h1>
+    
+    {% if exhibitions %}
+        <ul>
+        {% for exhibition in exhibitions %}
+            <li>
+                <h2>{{ exhibition.title }}</h2>
+                <p>Location: {{ exhibition.location }}</p>
+                <p>Start Date: {{ exhibition.start_date }}</p>
+                <p>End Date: {{ exhibition.end_date }}</p>
+                <p>Description: {{ exhibition.description }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No exhibitions available.</p>
+    {% endif %}
+</body>
+</html> 

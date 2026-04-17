@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tag %}
+
+{% block content %}
+<!-- Invoice Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="{% url 'mainpage' %}">Home</a>
+                <a class="breadcrumb-item text-dark" href="{% url 'cart' %}">Shopping Cart</a>
+                <a class="breadcrumb-item text-dark" href="{% url 'checkout' %}">Checkout</a>
+                <span class="breadcrumb-item active">Invoice</span>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row px-xl-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="bg-light p-30 mb-5">
+                <!-- Invoice Header -->
+                <div class="text-center mb-4">
+                    <h2 class="text-primary">Order Invoice</h2>
+                    <p class="text-muted">Order #{{ data.id }}</p>
+                    <p class="text-muted">Date: {{ data.created_at|date:"F d, Y" }}</p>
+                </div>
+
+                <!-- Order Status -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Order Status</h5>
+                                <p class="mb-1"><strong>Payment Method:</strong> {{ data.Payment_type }}</p>
+                                <p class="mb-1"><strong>Payment Status:</strong> 
+                                    <span class="badge {% if data.Payment_status == 'Paid' %}bg-success{% else %}bg-warning{% endif %}">
+                                        {{ data.Payment_status }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Delivery Address</h5>
+                                <p class="mb-1">{{ data.first_name }} {{ data.last_name }}</p>
+                                <p class="mb-1">{{ data.address }}</p>
+                                <p class="mb-1">Phone: {{ data.mobile }}</p>
+                                <p class="mb-1">Email: {{ data.checkout_email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key,value in cart.items %}
+                            <tr>
+                                <td>{{ value.name }}</td>
+                                <td>{{ value.quantity }}</td>
+                                <td>₹{{ value.price }}</td>
+                                <td>₹{{ value.price|multiply:value.quantity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="row">
+                    <div class="col-md-6 offset-md-6">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Order Summary</h5>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Subtotal:</span>
+                                    <span>₹{{ cart_total }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Shipping:</span>
+                                    <span>₹10</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <strong>Total:</strong>
+                                    <strong>₹{{ cart_total|add:10 }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="text-center mt-4">
+                    <button onclick="window.print()" class="btn btn-primary">
+                        <i class="fas fa-print mr-2"></i>Print Invoice
+                    </button>
+                    <a href="{% url 'mainpage' %}" class="btn btn-secondary ml-2">
+                        <i class="fas fa-home mr-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Invoice End -->
+
+<style>
+    @media print {
+        .breadcrumb, .btn {
+            display: none !important;
+        }
+        .container-fluid {
+            width: 100%;
+            padding: 0;
+        }
+        .bg-light {
+            background-color: #fff !important;
+        }
+    }
+</style>
+
+{% if messages %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by Name</span></h5>
+            <div class="bg-light p-4 mb-30">
+                <form>
+                    {% for i in data1 %}
+                    <div class="d-flex align-items-center justify-content-left mb-3">
+                        •&nbsp;&nbsp;<a for="price-all" href="{% url 'productcatev' i.id %}" style="color:#6c757d; text-decoration: underline;" class="{% if current_category.id == i.id %}fw-bold{% endif %}">{{i.category_name}}</a>
+                    </div>
+                    {% endfor %}
+                </form>
+            </div>
+            <!-- Price End -->
+        </div>
+        <!-- Shop Sidebar End -->
+
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            {% if messages %}
+            <div class="messages mb-4">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if data %}
+            <div class="row pb-3">
+                {% for i in data %}
+                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="{{i.image.url}}" alt="">
+                            <div class="product-action">
+                                {% if i.id %}
+                                <a class="btn btn-outline-dark btn-square" href="{% url 'cart_add' i.id %}"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="{% url 'ProductDetails' i.id %}"><i class="fa fa-eye"></i></a>
+                                {% else %}
+                                <a class="btn btn-outline-dark btn-square" href="{% url 'shop' %}"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="{% url 'shop' %}"><i class="fa fa-eye"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            {% if i.id %}
+                            <a class="h6 text-decoration-none text-wrap" style="width: 9rem;" href="{% url 'ProductDetails' i.id %}">{{i.name}}</a>
+                            {% else %}
+                            <a class="h6 text-decoration-none text-wrap" style="width: 9rem;" href="{% url 'shop' %}">{{i.name}}</a>
+                            {% endif %}
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>₹{{i.price}}</h5><h6 class="text-muted ml-2"></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination Start -->
+            {% if page_obj.has_other_pages %}
+            <div class="col-12 pb-1">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center mb-3">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            {% endif %}
+            <!-- Pagination End -->
+            {% else %}
+            <div class="text-center py-5">
+                <h3>No products found in this category</h3>
+                <a href="{% url 'shop' %}" class="btn btn-primary mt-3">View All Products</a>
+            </div>
+            {% endif %}
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+<!-- Shop End -->
+
+{% endblock %}

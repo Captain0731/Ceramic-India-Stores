@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Exhibitions - Elegant Tiles{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="{% url 'mainpage' %}">Home</a>
+                <span class="breadcrumb-item active">Exhibitions</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Filter Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter</span></h5>
+            <div class="bg-light p-4 mb-30">
+                <div class="d-flex align-items-center justify-content-left mb-3">
+                    <a href="{% url 'exhibition:exhibition_list' %}" style="color:#6c757d; text-decoration: underline;">All Exhibitions</a>
+                </div>
+                <div class="d-flex align-items-center justify-content-left mb-3">
+                    <a href="?status=active" style="color:#6c757d; text-decoration: underline;">Active Exhibitions</a>
+                </div>
+                <div class="d-flex align-items-center justify-content-left mb-3">
+                    <a href="?status=upcoming" style="color:#6c757d; text-decoration: underline;">Upcoming Exhibitions</a>
+                </div>
+            </div>
+            <!-- Filter End -->
+        </div>
+        <!-- Shop Sidebar End -->
+
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row pb-3">
+                {% for exhibition in exhibitions %}
+                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            {% if exhibition.image %}
+                            <img class="img-fluid w-100" src="{{ exhibition.image.url }}" alt="{{ exhibition.title }}">
+                            {% else %}
+                            <img class="img-fluid w-100" src="{% static 'img/default-exhibition.jpg' %}" alt="Default Exhibition Image">
+                            {% endif %}
+                            <div class="product-action">
+                                <a class="btn btn-outline-dark btn-square" href="{% url 'exhibition:exhibition_detail' exhibition.pk %}"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-wrap" href="{% url 'exhibition:exhibition_detail' exhibition.pk %}">{{ exhibition.title }}</a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <p class="text-muted"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{ exhibition.location }}</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <p class="text-muted"><i class="fa fa-calendar text-primary mr-2"></i>{{ exhibition.start_date|date:"F d, Y" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="text-center">
+                        <h3 class="text-muted">No exhibitions available at the moment.</h3>
+                        <p class="text-muted">Please check back later for upcoming exhibitions.</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+
+<center>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" style="color:black; padding: 0px 8px; background-color:#FFD333; font-size:25px; text-decoration:none;"><</a>&nbsp;&nbsp;
+        {% endif %}
+        <span>{{ page_obj.number }}</span>
+        {% if page_obj.has_next %}
+        &nbsp;&nbsp;<a href="?page={{ page_obj.next_page_number }}" style="color:black; padding: 0px 8px; background-color:#FFD333; font-size:25px; text-decoration:none;">></a>
+        {% endif %}
+    {% endif %}
+</center>
+
+<!-- Shop End -->
+{% endblock %} 

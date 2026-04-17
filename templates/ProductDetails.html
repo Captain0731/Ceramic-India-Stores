@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="{% url 'mainpage' %}">Home</a>
+                <a class="breadcrumb-item text-dark" href="{% url 'shop' %}">Shop</a>
+                <span class="breadcrumb-item active">Product Detail</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Shop Detail Start -->
+<div class="container-fluid pb-5">
+   {% for i in data %}
+    <div class="row px-xl-5">
+        <div class="col-lg-5 mb-30">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner bg-light">
+                    <div class="carousel-item active">
+                        <img class="w-100 h-100" src="{{i.image.url}}" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 h-auto mb-30">
+            <div class="h-100 bg-light p-30">
+                <h4 class="mb-3">{{i.name}}</h4>
+                <h3 class="mb-4">₹{{i.price}}</h3>
+                <p class="mb-4">{{i.description}}</p>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="input-group quantity mr-3" style="width: 130px;">
+                        <div class="input-group-btn">
+                            <a href="{% url 'item_decrement' i.id %}" class="btn btn-sm btn-primary btn-minus">
+                                <i class="fa fa-minus"></i>
+                            </a>
+                        </div>
+                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1" readonly>
+                        <div class="input-group-btn">
+                            <a href="{% url 'item_increment' i.id %}" class="btn btn-sm btn-primary btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="{% url 'cart_add' i.id %}" class="btn btn-primary px-3">
+                        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+                    </a>
+                </div>
+                <div class="d-flex pt-2">
+                    <strong class="text-dark mr-2">Share on:</strong>
+                    <div class="d-inline-flex">
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<!-- Shop Detail End -->
+
+<!-- Reviews Start -->
+<div class="container-fluid pb-5">
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="bg-light p-30">
+                <div class="nav nav-tabs mb-4">
+                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-3">Reviews</a>
+                </div>
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% for i in page_obj %}
+                            <div class="media mb-4">
+                                <img src="{% static 'img/download.jpeg' %}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px; border-radius: 50%">
+                                <div class="media-body">
+                                    <h6>{{i.name}}</h6>
+                                    <p class="text-wrap" style="max-width:600px;">{{i.reviews}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h4 class="mb-4">Leave a review</h4>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div style="display:none;">{{data1.product_review}}</div>
+                                    {{data1.reviews}}
+                                </div>
+                                <div class="form-group">
+                                    {{data1.name}}
+                                </div>
+                                <div class="form-group">
+                                    {{data1.email}}
+                                </div>
+                                <div class="form-group mb-0">
+                                    <button type="submit" class="btn btn-primary px-3">Leave Your Review</button>
+                                </div>
+                            </form>
+                            {% if msg %}
+                            <div class="alert alert-danger mt-3" role="alert">
+                                {{msg}}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-12 text-center mt-4">
+                            {% if page_obj.has_previous %}
+                            <a href="?page={{page_obj.previous_page_number}}" class="btn btn-primary mx-1"><i class="fa fa-angle-left"></i></a>
+                            {% endif %}
+                            
+                            <span class="mx-2">Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+                            
+                            {% if page_obj.has_next %}
+                            <a href="?page={{page_obj.next_page_number}}" class="btn btn-primary mx-1"><i class="fa fa-angle-right"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Reviews End -->
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="bg-light p-30 mb-5 text-center">
+                <i class="fas fa-check-circle text-success" style="font-size: 64px;"></i>
+                <h2 class="mt-4">Order Placed Successfully!</h2>
+                <p class="lead">Your order has been received and is being processed.</p>
+                
+                <div class="mt-4">
+                    <h5>Order Details:</h5>
+                    <p>Order ID: #{{order.id}}</p>
+                    <p>Payment Method: Cash on Delivery</p>
+                    <p>Total Amount: ₹{{order.OrderPrice}}</p>
+                </div>
+
+                <div class="mt-4">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Important Information</h5>
+                        <p>For Cash on Delivery orders:</p>
+                        <ul class="text-left">
+                            <li>The invoice will be available after delivery and payment completion</li>
+                            <li>You will pay the full amount when the order is delivered</li>
+                            <li>Our delivery partner will contact you shortly to arrange the delivery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="alert alert-warning">
+                        <h5><i class="fas fa-exclamation-triangle"></i> After Delivery</h5>
+                        <p>Once your order has been delivered and you've made the payment, click the button below to mark the order as paid and view your invoice.</p>
+                        <a href="{% url 'mark_order_paid' order.id %}" class="btn btn-warning mt-2">Mark Order as Paid</a>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <a href="{% url 'mainpage' %}" class="btn btn-primary">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

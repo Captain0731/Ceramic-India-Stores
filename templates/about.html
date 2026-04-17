@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- About Start -->
+<div class="container-fluid">
+    <!-- Hero Section -->
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="position-relative">
+                <img src="{% static 'img/about-hero.jpg' %}" alt="About Us" class="img-fluid w-100" style="height: 400px; object-fit: cover;">
+                <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+                    <h1 class="display-4 fw-bold">About Our Store</h1>
+                    <p class="lead">Your Trusted Shopping Destination</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Content -->
+    <div class="row px-xl-5 py-5">
+        <div class="col-lg-6 mb-4">
+            <div class="bg-light p-4 rounded shadow-sm">
+                <h2 class="mb-4 text-primary">Our Story</h2>
+                <p class="mb-4">Founded in 2024, our store has been dedicated to providing high-quality products and exceptional customer service. What started as a small local shop has grown into a trusted online destination for shoppers worldwide.</p>
+                <p class="mb-4">We believe in offering the best products at competitive prices while maintaining the highest standards of quality and customer satisfaction.</p>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <div class="bg-light p-4 rounded shadow-sm">
+                <h2 class="mb-4 text-primary">Our Mission</h2>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                    <p class="mb-0">Provide high-quality products at competitive prices</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                    <p class="mb-0">Ensure excellent customer service and support</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                    <p class="mb-0">Maintain fast and reliable shipping services</p>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="fas fa-check-circle text-primary fa-2x me-3"></i>
+                    <p class="mb-0">Support our local community and environment</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row px-xl-5 py-5 bg-light">
+        <div class="col-12 text-center mb-5">
+            <h2 class="text-primary">Why Choose Us?</h2>
+            <p class="lead">We're committed to providing the best shopping experience</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-shipping-fast fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Fast Shipping</h5>
+                    <p class="card-text">Quick and reliable delivery to your doorstep</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-undo fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Easy Returns</h5>
+                    <p class="card-text">Hassle-free return policy for your convenience</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-headset fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">24/7 Support</h5>
+                    <p class="card-text">Our team is always ready to assist you</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="row px-xl-5 py-5">
+        <div class="col-12 text-center mb-5">
+            <h2 class="text-primary">Meet Our Team</h2>
+            <p class="lead">The people behind your great shopping experience</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <img src="{% static 'img/team-1.jpg' %}" alt="Team Member" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    <h5 class="card-title">John Doe</h5>
+                    <p class="text-muted">Founder & CEO</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <img src="{% static 'img/team-2.jpg' %}" alt="Team Member" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    <h5 class="card-title">Jane Smith</h5>
+                    <p class="text-muted">Marketing Director</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <img src="{% static 'img/team-3.jpg' %}" alt="Team Member" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    <h5 class="card-title">Mike Johnson</h5>
+                    <p class="text-muted">Customer Service Manager</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-primary me-2"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="row px-xl-5 py-5 bg-light">
+        <div class="col-12 text-center mb-5">
+            <h2 class="text-primary">Get in Touch</h2>
+            <p class="lead">We'd love to hear from you</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-map-marker-alt fa-3x text-primary mb-3"></i>
+                    <h5>Our Location</h5>
+                    <p>123 Store Street, City, Country</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-phone fa-3x text-primary mb-3"></i>
+                    <h5>Call Us</h5>
+                    <p>+1 234 567 890</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                    <h5>Email Us</h5>
+                    <p>info@ourstore.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+{% endblock %} 

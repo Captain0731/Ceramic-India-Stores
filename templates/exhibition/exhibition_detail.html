@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ exhibition.title }} - Elegant Tiles{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="{% url 'mainpage' %}">Home</a>
+                <a class="breadcrumb-item text-dark" href="{% url 'exhibition:exhibition_list' %}">Exhibitions</a>
+                <span class="breadcrumb-item active">{{ exhibition.title }}</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Exhibition Detail Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="bg-light p-4">
+                {% if exhibition.image %}
+                <div class="product-img position-relative overflow-hidden mb-4">
+                    <img class="img-fluid w-100" src="{{ exhibition.image.url }}" alt="{{ exhibition.title }}">
+                </div>
+                {% endif %}
+                
+                <div class="text-center mb-4">
+                    <h1 class="h3 text-uppercase">{{ exhibition.title }}</h1>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <p class="text-muted mr-3">
+                            <i class="fa fa-map-marker-alt text-primary mr-2"></i>{{ exhibition.location }}
+                        </p>
+                        <p class="text-muted">
+                            <i class="fa fa-calendar text-primary mr-2"></i>
+                            {{ exhibition.start_date|date:"F d, Y" }} - {{ exhibition.end_date|date:"F d, Y" }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="exhibition-description mb-4">
+                    <h4 class="text-uppercase mb-3">About the Exhibition</h4>
+                    <p class="mb-4">{{ exhibition.description }}</p>
+                </div>
+
+                <div class="text-center">
+                    <a href="{% url 'exhibition:exhibition_list' %}" class="btn btn-primary">
+                        <i class="fa fa-arrow-left mr-2"></i>Back to Exhibitions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Exhibition Detail End -->
+{% endblock %} 
